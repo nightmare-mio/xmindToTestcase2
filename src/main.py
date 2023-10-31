@@ -10,12 +10,14 @@
 
 from lib.readXmind import *
 from  lib.writeExcel import *
+from  lib.headExcel import *
 import logging
 def get_xmind_content(xmind_file,output_file):
     #生成测试用例
     read_xmind = ReadXmindList(xmind_file)
     # excel_title=read_xmind.excel_title #获取模块标题
-    write_excel = WriteExcel(output_file)
+    head_excel=headExcel()
+    write_excel = WriteExcel(output_file,head_excel)
     testcase_list = []
     read_xmind.get_list_content(read_xmind.content, testcase_list, write_excel )#写入excel
     write_excel.write_analysis_wooksheek()#写入测试分析excel

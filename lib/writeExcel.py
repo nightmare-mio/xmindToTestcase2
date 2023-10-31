@@ -11,8 +11,9 @@ class WriteExcel():
                                  'borders:left 1,right 1,top 1,bottom 1,bottom_colour 0x3A')  # 无背景颜色居中
     style_num = xlwt.easyxf('pattern: pattern solid, fore_colour White;alignment:HORZ CENTER;'
                                'borders:left 1,right 1,top 1,bottom 1,bottom_colour 0x3A', num_format_str='#,##0.00')  # 无背景颜色居中
-    def __init__(self, output_file):
+    def __init__(self, output_file,head_excel):
         self.testcase_filename = output_file  # 生成用例的目录
+        self.head_excel = head_excel  # 表头
         self.wookbook=self.__init_excel()
         self.testcase_wooksheek=self.__init_testcase_wooksheek() #测试用例
         self.testscope_wooksheek = self.__init_testscope_wooksheek()  # 测试范围
@@ -47,10 +48,10 @@ class WriteExcel():
             if i in [4, 8, 9, 10, 11, 12]:
                 outline_wooksheek.col(i).width = (13 * 200)
         # 表头标题
-        head = ['需求编号', '功能模块', '功能名称', '功能点', '用例类型', '检查点', '用例设计', '预期结果', '类别',
-                '责任人', '状态', '更新日期', '用例编号'] #子功能名称
+        # head = ['需求编号', '功能模块', '功能名称', '功能点', '用例类型', '检查点', '用例设计', '预期结果', '类别',
+        #         '责任人', '状态', '更新日期', '用例编号'] #子功能名称
         index = 0
-        for head_item in head:
+        for head_item in self.head_excel.head_outline:
             outline_wooksheek.write(0, index, head_item, self.style)
             index += 1
         self.save_excel()
@@ -72,10 +73,11 @@ class WriteExcel():
                 testcase_wooksheek.col(i).width = (13 * 200)
             if i in [11]:
                 testcase_wooksheek.col(i).width = (17 * 220)
-        head = ['用例目录', '用例名称', '前置条件', '用例步骤', '预期结果', '用例类型', '用例状态', '用例等级', '需求ID',
-                '创建人', '测试结果', '是否开发自测']
+                # 测试用例工作簿的表头
+        # head = ['用例目录', '用例名称', '前置条件', '用例步骤', '预期结果', '用例类型', '用例状态', '用例等级', '需求ID',
+        #         '创建人', '测试结果', '是否开发自测']
         index = 0
-        for head_item in head:
+        for head_item in self.head_excel.head_testcase:
             testcase_wooksheek.write(0, index, head_item, self.style)
             index += 1
         self.save_excel()
@@ -90,9 +92,9 @@ class WriteExcel():
         for i in range(7):
             testscope_wooksheek.col(i).width = (13 * 367)
         # 表头标题
-        head = ['序号', '功能模块', '功能名称', '角色', '责任人', '更新日期', '备注'] #子功能名称
+        # head = ['序号', '功能模块', '功能名称', '角色', '责任人', '更新日期', '备注'] #子功能名称
         index = 0
-        for head_item in head:
+        for head_item in self.head_excel.head_testscope:
             testscope_wooksheek.write(0, index, head_item, self.style)
             index += 1
         self.save_excel()
