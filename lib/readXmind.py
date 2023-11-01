@@ -1,7 +1,14 @@
+'''
+Author: nightmare-mio
+Date: 2023-10-30 20:18:53
+LastEditTime: 2023-10-31 22:30:33
+Description: nightmare
+'''
 import sys
 from xmindparser import xmind_to_dict
 from .writeExcel import *
 class ReadXmindList(object):
+    # 初始化文件名、内容、画布名称、项目名（标题）
     def __init__(self, filename):
         self.filename = filename #xmind文件路径
         self.content, self.canvas_name, self.excel_title = self.__get_dic_content(self.filename)
@@ -61,7 +68,7 @@ class ReadXmindList(object):
             new_testcase.insert(5, step_list)
         return new_testcase, expected_list
 
-    def get_list_content(self, content, testcase_list, write_excel):
+    def get_list_content(self, content, testcase_list, write_excel,template):
         """
         #从Xmind文件中读取数据，保存至excel文件中
         :param testcase_list: 储存处理后的列表信息
@@ -74,11 +81,14 @@ class ReadXmindList(object):
             if val:
                 testcase_list.append(val[0])
                 if len(val) == 2:
-                    self.get_list_content(val[1], testcase_list, write_excel)
+                    self.get_list_content(val[1], testcase_list, write_excel,template)
                 else:
                     new_testcase = self.__format_list(testcase_list)  # 格式化为excell需要的数据
                     # print(new_testcase)
-                    write_excel.write_testcase_excel(new_testcase)  # 写入测试用例
+                    if(template=='template1'|template=='auto_template'):
+                        write_excel.write_testcase_excel_template(testcase_list)  # 写入测试用例
+                    elif(template=='template0'):
+                        write_excel.write_testcase_excel(new_testcase)  # 写入测试用例 # 写入测试用例
                     write_excel.write_outline_excel(new_testcase)   # 写入测试大纲
                     write_excel.write_testscope_wooksheek(new_testcase)  # 写入测试范围
                     testcase_list.pop()
