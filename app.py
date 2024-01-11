@@ -1,7 +1,7 @@
 '''
 Author: nightmare-mio wanglongwei2009@qq.com
 Date: 2023-11-02 00:03:10
-LastEditTime: 2024-01-11 21:49:22
+LastEditTime: 2024-01-11 22:44:07
 Description: 
 '''
 from flask import Flask, render_template, request, send_from_directory,session,make_response
@@ -69,6 +69,6 @@ def del_files():
                 os.remove(del_files_path)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',port=5000)
 
 
