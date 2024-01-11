@@ -1,7 +1,7 @@
 '''
 Author: nightmare-mio
 Date: 2023-10-30 20:18:53
-LastEditTime: 2023-10-31 22:30:33
+LastEditTime: 2024-01-11 21:21:34
 Description: nightmare
 '''
 import sys
@@ -85,8 +85,10 @@ class ReadXmindList(object):
                 else:
                     new_testcase = self.__format_list(testcase_list)  # 格式化为excell需要的数据
                     # print(new_testcase)
-                    if(template=='template1'|template=='auto_template'):
+                    if(template=='template1' or template=='auto_template'):
                         write_excel.write_testcase_excel_template(testcase_list)  # 写入测试用例
+                    elif(template=='template_yatop'):
+                        write_excel.write_testcase_excel_template_yatop(testcase_list)  # 写入测试用例 # 写入测试用例
                     elif(template=='template0'):
                         write_excel.write_testcase_excel(new_testcase)  # 写入测试用例 # 写入测试用例
                     write_excel.write_outline_excel(new_testcase)   # 写入测试大纲

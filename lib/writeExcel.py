@@ -184,7 +184,30 @@ class WriteExcel():
         li_var = [title_no, mod,modc, title, step, result,type]
         for j in li_var:
             self.testcase_wooksheek.write(self.__row, int(j[-1]), j[:-1],style)
-
+    
+    def write_testcase_excel_template_yatop(self,new_testcase):
+        """
+        写入测试用例excel
+        :param new_testcase:写入的列表信息
+        :return:
+        """
+        style = xlwt.easyxf('borders:left 1,right 1,top 1,bottom 1,bottom_colour 0x3A')
+        for i in range(12):
+            self.testcase_wooksheek.write(self.__row, i, "", style)
+        print(self.__row)
+        l_var = new_testcase
+        title_no = '%03d0' % self.__row  # 用例编号 0
+        mod = f'{l_var[1]}1'  # 所属模块  1
+        # modc=f'{l_var[1]}2' #所属子模块 2
+        title = f'{l_var[2]}2'  # 用例标题  3
+        pre = f'{l_var[3]}3'  # 前置步骤  3
+        step = f'{l_var[4]}4'  # 操作步骤  5
+        result = f'{l_var[5]}5'  # 预期结果  6
+        type = f'{l_var[6]}6'  # 用例类型  9
+        li_var = [title_no, mod, title,pre, step, result,type]
+        for j in li_var:
+            self.testcase_wooksheek.write(self.__row, int(j[-1]), j[:-1],style)
+            
     def write_testcase_excel(self,new_testcase):
         """
         写入测试用例excel

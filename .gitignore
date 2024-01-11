@@ -3,3 +3,4 @@ src/__pycache__
 upload/*.xls
 upload/*.xmind
 Xmind.py
+.vscode/launch.json

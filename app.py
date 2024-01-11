@@ -1,3 +1,9 @@
+'''
+Author: nightmare-mio wanglongwei2009@qq.com
+Date: 2023-11-02 00:03:10
+LastEditTime: 2024-01-11 21:49:22
+Description: 
+'''
 from flask import Flask, render_template, request, send_from_directory,session,make_response
 from src.main import *
 import os
@@ -32,7 +38,10 @@ def index():
         # 生成excel文件名
         excel_file_name = xmind_file_name.rsplit(".", 1)[0] + '.xls'
         # 调用方法将xmind文件转换为excel文件
-        get_xmind_content(save_path, os.path.join(upload_path, excel_file_name))
+        # get_xmind_content(save_path, os.path.join(upload_path, excel_file_name))
+        # get_xmind_content_template(save_path, os.path.join(upload_path, excel_file_name))
+        get_xmind_content_template_yatop(save_path, os.path.join(upload_path, excel_file_name))
+        # get_xmind_content_auto_template(save_path, os.path.join(upload_path, excel_file_name))
         res['file_url'] = os.path.join('/download/', excel_file_name)
         res['sucess_msg'] = xmind_file_name + ' 转换成功，点击下载用例！'
         return render_template('index.html', res = res)
